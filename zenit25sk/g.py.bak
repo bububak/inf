@@ -1,0 +1,12 @@
+max = int(input())
+s = input().split()
+
+l = []
+h = ""
+for i in range(len(s)):
+    n = s[i]
+    if l.count(n) < max:
+        l.append(n)
+        h += f"{n} "
+
+print(h[:-1])
