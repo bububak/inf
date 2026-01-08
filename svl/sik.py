@@ -115,6 +115,7 @@ def leftclick(e):
             tags="sel",
             fill=theme.overlay[0],
         )
+        c.tag_lower("sel")
 
 
 def pastel_color():
