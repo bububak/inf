@@ -219,5 +219,4 @@ c.bind("<3>", rightclick)
 
 
 
-print(field)
 root.mainloop()
