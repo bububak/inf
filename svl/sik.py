@@ -49,22 +49,20 @@ def rightclick(e):
 
 def draw_rows():
     global sizex, sizey, c
-    n = 0
+    n = "."
     for y in range(sizey):
         a = field[y]
         for x in range(sizex):
-            if a[x] == ".":
-                pass
-            else:
+            if not a[x] == ".":
                 n = int(a[x],16)
-            c.create_text(
-                x * s + s // 2,
-                y * s + s // 2,
-                text=n,
-                font="Arial 20 bold",
-                tags="num",
-                fill=theme.fg[0],
-            )
+                c.create_text(
+                    x * s + s // 2,
+                    y * s + s // 2,
+                    text=n,
+                    font="Arial 20 bold",
+                    tags="num",
+                    fill=theme.fg[0],
+                )
 
 
 def load_nums():
@@ -221,4 +219,5 @@ c.bind("<3>", rightclick)
 
 
 
+print(field)
 root.mainloop()
