@@ -81,7 +81,7 @@ def load_nums():
                 number_count += 1
 
 
-def wrong_user_input(ylist,xlist):
+def wrong_user_input(ylist,xlist,message):
     global s, c, w, first_click_registered
     c.create_rectangle(
         (
@@ -99,7 +99,7 @@ def wrong_user_input(ylist,xlist):
     first_click_registered = False
     c.delete("sel")
 
-    c.create_text(W//2,H//2,text="Invalid Move, RTFM", tags="wrongtext", font="arial 60 bold", fill="#FF0000")
+    c.create_text(W//2,H//2,text=f"Invalid Move:\n{message}", tags="wrongtext", font="arial 60 bold", fill="#FF0000")
 
     c.update()
     time.sleep(3)
@@ -111,7 +111,7 @@ def wrong_user_input(ylist,xlist):
 def check_win():
     global number_count, rects
     if number_count == len(rects):
-        c.create_text(W//2,H//2,text="YOU WIN!", tags="wintext", font="arial 60 bold", fill="#00FF00")
+        c.create_text(W//2,H//2,text="YOU WIN!", tags="wintext", font="arial 40 bold", fill="#00FF00")
         c.unbind("<1>")
         c.unbind("<3>")
 
@@ -132,27 +132,29 @@ def leftclick(e):
                 if field[y][x] != ".":
                     nums_in_sel += field[y][x]
 
-        # check overlap
+        # check overlap DOESNT WORK!! for top row if square blank
         x0, y0, x1, y1 = xlist[0]*s, ylist[0]*s, xlist[1]*s, ylist[1]*s
         for rect_id in rects:
-            rx0, ry0, rx1, ry1 = c.coords(rect_id)
+            foo = c.coords(rect_id)
+            rx0, ry0, rx1, ry1 = foo[0]-(w//2+1), foo[1]-(w//2+1), foo[2]+w//2, foo[3]+w//2
 
+            print(rx0,ry0,rx1,ry1)
             # x/y 1/0   r x/y 0/1
             if not (x1 <= rx0 or rx1 <= x0 or y1 <= ry0 or ry1 <= y0):
-                wrong_user_input(ylist,xlist)
+                wrong_user_input(ylist,xlist,"rectangle overlap")
                 return
 
         # privela cisel v selection
         if len(nums_in_sel) != 1:
             c.delete("sel")
-            wrong_user_input(ylist,xlist)
+            wrong_user_input(ylist,xlist,"number overlap")
             return
 
-        # iba jedno cislo v obdlzniku
+        # velkost obldznika sedi cislu
         if len(nums_in_sel) == 1 and ((xlist[1]+1-xlist[0])*(ylist[1]+1-ylist[0])) != int(nums_in_sel,16):
             first_click_registered = False
             c.delete("sel")
-            wrong_user_input(ylist,xlist)
+            wrong_user_input(ylist,xlist,"wrong size")
             return
 
 
@@ -196,7 +198,8 @@ def pastel_color():
 
 number_count = 0
 last_x, last_y = 0, 0
-s, o, w = 100, 0, 10
+changeable_w = 5
+s, o, w = 100, 0, changeable_w*2
 field = []
 rects = []
 theme = Catppuccin()
