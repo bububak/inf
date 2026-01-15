@@ -116,6 +116,12 @@ def check_win():
         c.unbind("<3>")
 
 
+def overlap_check(x0,y0,x1,y1,rx0,ry0,rx1,ry1):
+    if (y1 < ry0 or ry1 <= y0) and (x1 <= rx0 or rx1 <= x0):
+        return False
+    return True
+
+
 def leftclick(e):
     global first_click_registered, last_x, last_y, rect_counter, rects
     x = (e.x - o) // s
@@ -132,17 +138,23 @@ def leftclick(e):
                 if field[y][x] != ".":
                     nums_in_sel += field[y][x]
 
-        # check overlap DOESNT WORK!! for top row if square blank
+        # overlap_check
         x0, y0, x1, y1 = xlist[0]*s, ylist[0]*s, xlist[1]*s, ylist[1]*s
         for rect_id in rects:
             foo = c.coords(rect_id)
             rx0, ry0, rx1, ry1 = foo[0]-(w//2+1), foo[1]-(w//2+1), foo[2]+w//2, foo[3]+w//2
-
-            print(rx0,ry0,rx1,ry1)
-            # x/y 1/0   r x/y 0/1
-            if not (x1 <= rx0 or rx1 <= x0 or y1 <= ry0 or ry1 <= y0):
+            if overlap_check(x0,y0,x1,y1,int(rx0),int(ry0),int(rx1),int(ry1)):
                 wrong_user_input(ylist,xlist,"rectangle overlap")
                 return
+
+            # foo = c.coords(rect_id)
+            # rx0, ry0, rx1, ry1 = foo[0]-(w//2+1), foo[1]-(w//2+1), foo[2]+w//2, foo[3]+w//2
+            #
+            # print(rx0,ry0,rx1,ry1)
+            # # x/y 1/0   r x/y 0/1
+            # if not (x1 <= rx0 or rx1 <= x0 or y1 <= ry0 or ry1 <= y0):
+            # wrong_user_input(ylist,xlist,"rectangle overlap")
+            #     return
 
         # privela cisel v selection
         if len(nums_in_sel) != 1:
