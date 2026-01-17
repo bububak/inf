@@ -210,10 +210,13 @@ def pastel_color():
     return f"#{r:02x}{g:02x}{b:02x}"
 
 
+# only change s and changeable_w
+changeable_w = 5
+s = 100
+
 number_count = 0
 last_x, last_y = 0, 0
-changeable_w = 5
-s, o, w = 100, 0, changeable_w*2
+o, w = 0, changeable_w*2
 field = []
 rects = []
 theme = Catppuccin()
