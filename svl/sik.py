@@ -161,9 +161,9 @@ def leftclick(e):
             n = None
             if nums_in_sel.isnumeric():
                 n = int(nums_in_sel)
-            elif "A" <= nums_in_sel <= "Z":
+            elif ord("A") <= ord(nums_in_sel) <= ord("Z"):
                 n = int(ord(nums_in_sel))-55
-            elif "x" <= nums_in_sel <= "z":
+            elif ord("a") <= ord(nums_in_sel) <= ord("z"):
                 n = int(ord(nums_in_sel))-61
             if ((xlist[1]+1-xlist[0])*(ylist[1]+1-ylist[0])) != n:
                 first_click_registered = False
