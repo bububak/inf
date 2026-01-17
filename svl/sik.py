@@ -127,8 +127,8 @@ def check_win():
 
 def leftclick(e):
     global first_click_registered, last_x, last_y, rect_counter, rects
-    x = (e.x - o) // s
-    y = (e.y - o) // s
+    x = e.x // s
+    y = e.y // s
     xlist = sorted([x, last_x])
     ylist = sorted([y, last_y])
 
@@ -193,10 +193,10 @@ def leftclick(e):
         last_y = y
         first_click_registered = True
         c.create_rectangle(
-            x * s + o,
-            y * s + o,
-            x * s + s + o,
-            y * s + s + o,
+            x * s,
+            y * s,
+            x * s + s,
+            y * s + s,
             tags="sel",
             fill=theme.overlay[0],
         )
@@ -216,7 +216,7 @@ s = 100
 
 number_count = 0
 last_x, last_y = 0, 0
-o, w = 0, changeable_w*2
+w = changeable_w*2
 field = []
 rects = []
 theme = Catppuccin()
@@ -224,7 +224,7 @@ theme = Catppuccin()
 first_click_registered = False
 sizex, sizey = 0, 0
 load_nums()
-W, H = sizex * s + 2 * o, sizey * s + 2 * o
+W, H = sizex * s, sizey * s
 
 root = Tk()
 c = Canvas(width=W, height=H, bg=theme.bg[2])
