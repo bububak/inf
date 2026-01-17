@@ -54,7 +54,16 @@ def draw_rows():
         a = field[y]
         for x in range(sizex):
             if not a[x] == ".":
-                n = int(a[x],16)
+
+                if a[x].isnumeric():
+                    n = int(a[x])
+                elif ord("A") <= ord(a[x]) <= ord("Z"):
+                    n = int(ord(a[x]))-55
+                elif ord("a") <= ord(a[x]) <= ord("z"):
+                    n = int(ord(a[x]))-61
+                else:
+                    print("unknown characters in map file")
+
                 c.create_text(
                     x * s + s // 2,
                     y * s + s // 2,
@@ -111,15 +120,9 @@ def wrong_user_input(ylist,xlist,message):
 def check_win():
     global number_count, rects
     if number_count == len(rects):
-        c.create_text(W//2,H//2,text="YOU WIN!", tags="wintext", font="arial 40 bold", fill="#00FF00")
+        c.create_text(W//2,H//2,text="YOU WIN!", tags="wintext", font="arial 70 bold", fill="#00FF00")
         c.unbind("<1>")
         c.unbind("<3>")
-
-
-def overlap_check(x0,y0,x1,y1,rx0,ry0,rx1,ry1):
-    if (y1 < ry0 or ry1 <= y0) and (x1 <= rx0 or rx1 <= x0):
-        return False
-    return True
 
 
 def leftclick(e):
@@ -131,30 +134,21 @@ def leftclick(e):
 
     if first_click_registered:
 
+        # overlap_check
+        x0, y0, x1, y1 = xlist[0]*s, ylist[0]*s, xlist[1]*s+s, ylist[1]*s+s
+        for rect_id in rects:
+            foo = c.coords(rect_id)
+            rx0, ry0, rx1, ry1 = foo[0]-(w//2+1), foo[1]-(w//2+1), foo[2]+w//2, foo[3]+w//2
+            if not (y1 <= ry0 or ry1 <= y0 or x1 <= rx0 or rx1 <= x0):
+                wrong_user_input(ylist,xlist,"rectangle overlap")
+                return
+
         # zistovanie cisel v obdlzniku a zapisanie do 1 stringu
         nums_in_sel = ""
         for y in range(ylist[0],ylist[1]+1):
             for x in range(xlist[0],xlist[1]+1):
                 if field[y][x] != ".":
                     nums_in_sel += field[y][x]
-
-        # overlap_check
-        x0, y0, x1, y1 = xlist[0]*s, ylist[0]*s, xlist[1]*s, ylist[1]*s
-        for rect_id in rects:
-            foo = c.coords(rect_id)
-            rx0, ry0, rx1, ry1 = foo[0]-(w//2+1), foo[1]-(w//2+1), foo[2]+w//2, foo[3]+w//2
-            if overlap_check(x0,y0,x1,y1,int(rx0),int(ry0),int(rx1),int(ry1)):
-                wrong_user_input(ylist,xlist,"rectangle overlap")
-                return
-
-            # foo = c.coords(rect_id)
-            # rx0, ry0, rx1, ry1 = foo[0]-(w//2+1), foo[1]-(w//2+1), foo[2]+w//2, foo[3]+w//2
-            #
-            # print(rx0,ry0,rx1,ry1)
-            # # x/y 1/0   r x/y 0/1
-            # if not (x1 <= rx0 or rx1 <= x0 or y1 <= ry0 or ry1 <= y0):
-            # wrong_user_input(ylist,xlist,"rectangle overlap")
-            #     return
 
         # privela cisel v selection
         if len(nums_in_sel) != 1:
@@ -163,11 +157,19 @@ def leftclick(e):
             return
 
         # velkost obldznika sedi cislu
-        if len(nums_in_sel) == 1 and ((xlist[1]+1-xlist[0])*(ylist[1]+1-ylist[0])) != int(nums_in_sel,16):
-            first_click_registered = False
-            c.delete("sel")
-            wrong_user_input(ylist,xlist,"wrong size")
-            return
+        if len(nums_in_sel) == 1:
+            n = None
+            if nums_in_sel.isnumeric():
+                n = int(nums_in_sel)
+            elif "A" <= nums_in_sel <= "Z":
+                n = int(ord(nums_in_sel))-55
+            elif "x" <= nums_in_sel <= "z":
+                n = int(ord(nums_in_sel))-61
+            if ((xlist[1]+1-xlist[0])*(ylist[1]+1-ylist[0])) != n:
+                first_click_registered = False
+                c.delete("sel")
+                wrong_user_input(ylist,xlist,"wrong size")
+                return
 
 
         rects.append(
