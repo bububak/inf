@@ -151,6 +151,7 @@ wanted_window_size = 1000
 s = 50
 tile_color = "#89b4fa"
 
+
 chance = 30
 turn_delay = 500
 tile_count = wanted_window_size//s
