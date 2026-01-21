@@ -1,4 +1,5 @@
 from tkinter import Tk, Canvas
+import random
 
 
 
@@ -130,6 +131,15 @@ def keyboard_input(e):
         turn_delay = 50*n
 
 
+def randomize_field(e):
+    for y in range(sizey):
+        for x in range(sizex):
+            if random.randrange(0,100) < chance:
+                field[y][x].change_state()
+
+
+
+chance = 30
 turn_delay = 500
 sizex, sizey = 15, 15
 s = 50
@@ -141,7 +151,7 @@ theme = Catppuccin()
 root = Tk()
 c = Canvas(bg=theme.bg[2],width=WIDTH,height=HEIGHT)
 c.pack()
-tile_colors = [theme.bg[2],"#00AAAA"]
+tile_colors = [theme.bg[2],"#89b4fa"]
 field = generate_field()
 outline_colors = ["#f9e2af",theme.surface[2]]
 
@@ -151,6 +161,7 @@ c.focus_set()
 c.bind("<1>", leftclick)
 c.bind("<space>", toggle_running)
 c.bind("<Key>", keyboard_input)
+c.bind("r",randomize_field)
 draw_outlines()
 
 
