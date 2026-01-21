@@ -55,6 +55,10 @@ class Tile:
             for x in range(self.x-1,self.x+2):
                 counter += int(field[y][x].state)
 
+        if counter == 0:
+            self.new = False
+            return
+
         if self.state: # ak ziju
             if counter < 2:
                 self.new = False
@@ -79,7 +83,7 @@ class Tile:
 def leftclick(e):
     x = e.x//s
     y = e.y//s
-    if 0 < x < sizex*s and 0 < y < sizey*s:
+    if 0 <= x < sizex*s and 0 <= y < sizey*s:
         field[y][x].change_state()
 
 
@@ -110,16 +114,16 @@ def toggle_running(e):
 
 def iterate_turn():
     if run:
+        c.after(turn_delay, iterate_turn)
+    if run:
         for y in range(sizey):
             for x in range(sizex):
                 field[y][x].logic()
 
         for y in range(sizey):
             for x in range(sizex):
-                field[y][x].update_rect()
-
-    if run:
-        c.after(turn_delay, iterate_turn)
+                if field[y][x].state != field[y][x].new:
+                    field[y][x].update_rect()
 
 
 def keyboard_input(e):
@@ -135,14 +139,22 @@ def randomize_field(e):
     for y in range(sizey):
         for x in range(sizex):
             if random.randrange(0,100) < chance:
-                field[y][x].change_state()
+                field[y][x].new = True
+            else:
+                field[y][x].new = False
+            field[y][x].update_rect()
 
 
+
+# changeable variables
+wanted_window_size = 1000
+s = 50
+tile_color = "#89b4fa"
 
 chance = 30
 turn_delay = 500
-sizex, sizey = 15, 15
-s = 50
+tile_count = wanted_window_size//s
+sizex, sizey = tile_count, tile_count
 WIDTH, HEIGHT = sizex*s, sizey * s
 run = False
 o = 1
@@ -151,9 +163,9 @@ theme = Catppuccin()
 root = Tk()
 c = Canvas(bg=theme.bg[2],width=WIDTH,height=HEIGHT)
 c.pack()
-tile_colors = [theme.bg[2],"#89b4fa"]
+tile_colors = [theme.bg[2],tile_color]
 field = generate_field()
-outline_colors = ["#f9e2af",theme.surface[2]]
+outline_colors = [theme.surface[2],theme.surface[0]]
 
 c.focus_set()
 # neviem ako implementovat motion, musel by som dat key up key down eventy dva
