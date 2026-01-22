@@ -114,8 +114,6 @@ def toggle_running(e):
 
 def iterate_turn():
     if run:
-        c.after(turn_delay, iterate_turn)
-    if run:
         for y in range(sizey):
             for x in range(sizex):
                 field[y][x].logic()
@@ -124,6 +122,8 @@ def iterate_turn():
             for x in range(sizex):
                 if field[y][x].state != field[y][x].new:
                     field[y][x].update_rect()
+    if run:
+        c.after(turn_delay, iterate_turn)
 
 
 def keyboard_input(e):
@@ -148,11 +148,11 @@ def randomize_field(e):
 
 # changeable variables
 wanted_window_size = 1000
-s = 50
+s = 10
 tile_color = "#89b4fa"
 
 
-chance = 30
+chance = 50
 turn_delay = 500
 tile_count = wanted_window_size//s
 sizex, sizey = tile_count, tile_count
