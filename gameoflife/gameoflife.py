@@ -38,12 +38,12 @@ class Tile:
         self.x = x
         self.state = False
         self.new = False
-        self.rect = c.create_rectangle(x*s+o+1,y*s+o+1,x*s+s-o,y*s+s-o,width=0,fill=tile_colors[0],tags=f"y{y}x{x}")
+        self.rect = game.c.create_rectangle(x*game.s+game.o+1,y*game.s+game.o+1,x*game.s+game.s-game.o,y*game.s+game.s-game.o,width=0,fill=game.tile_colors[0],tags=f"y{y}x{x}")
 
 
     def change_state(self):
         self.state = not self.state
-        c.itemconfig(self.rect, fill=tile_colors[self.state])
+        game.c.itemconfig(self.rect, fill=game.tile_colors[self.state])
 
 
     def logic(self):
@@ -53,7 +53,7 @@ class Tile:
 
         for y in range(self.y-1,self.y+2):
             for x in range(self.x-1,self.x+2):
-                counter += int(field[y][x].state)
+                counter += int(game.field[y][x].state)
 
         if counter == 0:
             self.new = False
@@ -76,107 +76,115 @@ class Tile:
 
     def update_rect(self):
         self.state = self.new
-        c.itemconfig(self.rect, fill=tile_colors[self.state])
+        game.c.itemconfig(self.rect, fill=game.tile_colors[self.state])
 
 
 
-def leftclick(e):
-    x = e.x//s
-    y = e.y//s
-    if 0 <= x < sizex*s and 0 <= y < sizey*s:
-        field[y][x].change_state()
+class Game():
+
+    def __init__(self) -> None:
+        pass
 
 
-def draw_outlines():
-    for i in range(sizex):
-        c.create_line(0,i*s,WIDTH,i*s,fill=outline_colors[0],tags="line")
-        c.create_line(i*s,0,i*s,HEIGHT,fill=outline_colors[0],tags="line")
+    def intro_window(self):
+        self.wanted_window_size = 1000
+        self.s = 50
+        self.tile_color = "#89b4fa"
+
+        self.chance = 50
+        self.turn_delay = 500
+        self.tile_count = self.wanted_window_size//self.s
+        self.sizex, self.sizey = self.tile_count, self.tile_count
+        self.WIDTH, self.HEIGHT = self.sizex*self.s, self.sizey * self.s
+        self.run = False
+        self.o = 1
+
+        self.tile_colors = [theme.bg[2],self.tile_color]
+        self.outline_colors = [theme.surface[2],theme.surface[0]]
+
+        self.draw_canvas_from_parameters()
 
 
-def generate_field():
-    f = []
-    l = []
-    for y in range(sizey+1):
-        for x in range(sizex+1):
-            l.append(Tile(y,x))
-        f.append(l.copy())
+    def draw_canvas_from_parameters(self):
+        self.root = Tk()
+        self.c = Canvas(bg=theme.bg[2],width=self.WIDTH,height=self.HEIGHT)
+        self.c.pack()
+        self.field = self.generate_field()
+
+        self.c.focus_set()
+        self.c.bind("<1>", self.leftclick)
+        self.c.bind("<space>", self.toggle_running)
+        self.c.bind("<Key>", self.keyboard_input)
+        self.c.bind("r", self.randomize_field)
+        self.draw_outlines()
+
+        self.root.mainloop()
+
+    def leftclick(self, e):
+        x = e.x//self.s
+        y = e.y//self.s
+        if 0 <= x < self.sizex*self.s and 0 <= y < self.sizey*self.s:
+            self.field[y][x].change_state()
+
+
+    def draw_outlines(self):
+        for i in range(self.sizex):
+            self.c.create_line(0,i*self.s,self.WIDTH,i*self.s,fill=self.outline_colors[0],tags="line")
+            self.c.create_line(i*self.s,0,i*self.s,self.HEIGHT,fill=self.outline_colors[0],tags="line")
+
+
+    def generate_field(self):
+        f = []
         l = []
-    return f.copy()
+        for y in range(self.sizey+1):
+            for x in range(self.sizex+1):
+                l.append(Tile(y,x))
+            f.append(l.copy())
+            l = []
+        return f.copy()
 
 
-def toggle_running(e):
-    global run
-    run = not run
-    c.itemconfig("line",fill=outline_colors[int(run)])
-    if run:
-        iterate_turn()
+    # tuto si skoncil
+    def toggle_running(self, e):
+        self.run = not self.run
+        self.c.itemconfig("line",fill=self.outline_colors[int(self.run)])
+        if self.run:
+            self.iterate_turn()
 
 
-def iterate_turn():
-    if run:
-        for y in range(sizey):
-            for x in range(sizex):
-                field[y][x].logic()
+    def iterate_turn(self):
+        if self.run:
+            for y in range(self.sizey):
+                for x in range(self.sizex):
+                    self.field[y][x].logic()
 
-        for y in range(sizey):
-            for x in range(sizex):
-                if field[y][x].state != field[y][x].new:
-                    field[y][x].update_rect()
-    if run:
-        c.after(turn_delay, iterate_turn)
-
-
-def keyboard_input(e):
-    global turn_delay
-    if e.char.isnumeric():
-        n = int(e.char)
-        if n == 0:
-            n = 10
-        turn_delay = 50*n
+            for y in range(self.sizey):
+                for x in range(self.sizex):
+                    if self.field[y][x].state != self.field[y][x].new:
+                        self.field[y][x].update_rect()
+        if self.run:
+            self.c.after(self.turn_delay, self.iterate_turn)
 
 
-def randomize_field(e):
-    for y in range(sizey):
-        for x in range(sizex):
-            if random.randrange(0,100) < chance:
-                field[y][x].new = True
-            else:
-                field[y][x].new = False
-            field[y][x].update_rect()
+    def keyboard_input(self, e):
+        if e.char.isnumeric():
+            n = int(e.char)
+            if n == 0:
+                n = 10
+            self.turn_delay = 50*n
 
 
+    def randomize_field(self, e):
+        for y in range(self.sizey):
+            for x in range(self.sizex):
+                if random.randrange(0,100) < self.chance:
+                    self.field[y][x].new = True
+                else:
+                    self.field[y][x].new = False
+                self.field[y][x].update_rect()
 
-# changeable variables
-wanted_window_size = 1000
-s = 10
-tile_color = "#89b4fa"
 
-
-chance = 50
-turn_delay = 500
-tile_count = wanted_window_size//s
-sizex, sizey = tile_count, tile_count
-WIDTH, HEIGHT = sizex*s, sizey * s
-run = False
-o = 1
 
 theme = Catppuccin()
-root = Tk()
-c = Canvas(bg=theme.bg[2],width=WIDTH,height=HEIGHT)
-c.pack()
-tile_colors = [theme.bg[2],tile_color]
-field = generate_field()
-outline_colors = [theme.surface[2],theme.surface[0]]
-
-c.focus_set()
-# neviem ako implementovat motion, musel by som dat key up key down eventy dva
-# c.bind("<B1-Motion>",leftclick)
-c.bind("<1>", leftclick)
-c.bind("<space>", toggle_running)
-c.bind("<Key>", keyboard_input)
-c.bind("r",randomize_field)
-draw_outlines()
-
-
-
-root.mainloop()
+game = Game()
+game.intro_window()
