@@ -1,0 +1,17 @@
+Bratislava;Brussels Zaventem
+London Stansted;Berlin
+Wien Schwechat;Paris Orly
+Rome Ciampino;Bratislava
+Wien Schwechat;London Heathrow
+Stockholm Arlanda;Paris Orly
+London Heathrow;Warsaw
+Frankfurkt;Bratislava
+London Heathrow;Frankfurt
+Rome Ciampino;Warsaw
+Oslo Gardermoen;Barcelona
+Wien Schwechat;Warsaw
+Rome Ciampino;Barcelona
+Paris Orly;Oslo Gardermoen
+Barcelona;Stockholm Arlanda
+Copenhagen Kastrup;Rome Ciampino
+Wien Schwechat;Rome Ciampino
