@@ -8,3 +8,7 @@ def clear_screen():
 
 def hide_cursor():
     print("\x1b[?25l")
+
+
+def move_cursor(x, y):
+    print(f"\x1b[{y};{x}H", end="")
