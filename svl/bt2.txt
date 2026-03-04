@@ -1,0 +1,12 @@
+cut
+copy
+run
+ffwd
+play
+paste
+load
+window
+rew
+rec
+exit
+file

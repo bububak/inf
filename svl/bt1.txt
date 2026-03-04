@@ -1,0 +1,6 @@
+cut
+copy
+run
+window
+rew
+rec
