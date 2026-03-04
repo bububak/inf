@@ -5,16 +5,18 @@ list_sum = number
 
 while nums[0] != number:
 
-    if NO_DUPLICATES:
-        if sum(set(nums)) == number:
+    if list_sum == number:
+
+        if NO_DUPLICATES:
+            if sum(set(nums)) == number:
+                print(nums)
+        else:
             print(nums)
+
+        list_sum -= nums.pop()
+        nums[-1] += 1
+        list_sum += 1
+
     else:
-        print(nums)
-
-    list_sum -= nums.pop()
-    nums[-1] += 1
-    list_sum += 1
-
-    while list_sum != number:
         nums.append(1)
         list_sum += 1
