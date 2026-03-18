@@ -6,18 +6,19 @@ while line != "":
     words.append(line.strip())
     line = f.readline()
 f.close()
-words = sorted(words, key=len)
+# words = sorted(words, key=len)
 
 
 def find_char(w,chars):
     if w == []:
         print(chars)
-        return
+        return chars
 
     word = w[0]
     for c in word:
         if not c in chars:
-            find_char(w[1:],chars+c)
+            if find_char(w[1:],chars+c):
+                return True
 
 
 find_char(words,"")
