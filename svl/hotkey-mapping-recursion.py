@@ -11,14 +11,14 @@ f.close()
 
 def find_char(w,chars):
     if w == []:
-        print(chars)
         return chars
 
     word = w[0]
     for c in word:
         if not c in chars:
-            if find_char(w[1:],chars+c):
-                return True
+            downstream_output = find_char(w[1:],chars+c)
+            if downstream_output:
+                return downstream_output
 
 
-find_char(words,"")
+print(find_char(words,""))
