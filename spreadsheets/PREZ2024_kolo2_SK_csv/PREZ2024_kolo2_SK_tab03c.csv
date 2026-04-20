@@ -1,0 +1,99 @@
+"Kód kraja","Názov kraja","Kód územného obvodu","Názov územného obvodu","Poradie na hlasovacom lístku","Meno","Priezvisko","Počet platných hlasov","Podiel platných hlasov v %","Počet platných hlasov v mestách a mestských častiach","Podiel platných hlasov v mestách a mestských častiach v %","Počet platných hlasov v obciach","Podiel platných hlasov v obciach v %"
+1,"Bratislavský kraj",101,"Bratislava",1,"Ivan","Korčok",192289,68.99,192289,68.99,0,0.00
+1,"Bratislavský kraj",101,"Bratislava",2,"Peter","Pellegrini",86393,31.00,86393,31.00,0,0.00
+1,"Bratislavský kraj",102,"Malacky",1,"Ivan","Korčok",22320,53.66,9490,57.01,12830,51.42
+1,"Bratislavský kraj",102,"Malacky",2,"Peter","Pellegrini",19273,46.33,7155,42.98,12118,48.57
+1,"Bratislavský kraj",103,"Pezinok",1,"Ivan","Korčok",23549,58.91,14005,61.63,9544,55.32
+1,"Bratislavský kraj",103,"Pezinok",2,"Peter","Pellegrini",16424,41.08,8716,38.36,7708,44.67
+1,"Bratislavský kraj",104,"Senec",1,"Ivan","Korčok",37071,65.10,6581,63.57,30490,65.44
+1,"Bratislavský kraj",104,"Senec",2,"Peter","Pellegrini",19872,34.89,3771,36.42,16101,34.55
+2,"Trnavský kraj",201,"Dunajská Streda",1,"Ivan","Korčok",20964,46.35,8522,48.77,12442,44.83
+2,"Trnavský kraj",201,"Dunajská Streda",2,"Peter","Pellegrini",24257,53.64,8949,51.22,15308,55.16
+2,"Trnavský kraj",202,"Galanta",1,"Ivan","Korčok",19970,46.20,8741,49.37,11229,44.00
+2,"Trnavský kraj",202,"Galanta",2,"Peter","Pellegrini",23252,53.79,8961,50.62,14291,55.99
+2,"Trnavský kraj",203,"Piešťany",1,"Ivan","Korčok",16911,49.11,10017,55.10,6894,42.42
+2,"Trnavský kraj",203,"Piešťany",2,"Peter","Pellegrini",17517,50.88,8161,44.89,9356,57.57
+2,"Trnavský kraj",204,"Senica",1,"Ivan","Korčok",31292,53.87,15508,54.72,15784,53.05
+2,"Trnavský kraj",204,"Senica",2,"Peter","Pellegrini",26795,46.12,12830,45.27,13965,46.94
+2,"Trnavský kraj",205,"Trnava",1,"Ivan","Korčok",48964,49.90,25172,52.59,23792,47.34
+2,"Trnavský kraj",205,"Trnava",2,"Peter","Pellegrini",49152,50.09,22688,47.40,26464,52.65
+3,"Trenčiansky kraj",301,"Bánovce nad Bebravou",1,"Ivan","Korčok",7243,36.91,3474,40.02,3769,34.44
+3,"Trenčiansky kraj",301,"Bánovce nad Bebravou",2,"Peter","Pellegrini",12380,63.08,5206,59.97,7174,65.55
+3,"Trenčiansky kraj",302,"Nové Mesto nad Váhom",1,"Ivan","Korčok",21719,45.18,11338,48.59,10381,41.96
+3,"Trenčiansky kraj",302,"Nové Mesto nad Váhom",2,"Peter","Pellegrini",26347,54.81,11992,51.40,14355,58.03
+3,"Trenčiansky kraj",303,"Považská Bystrica",1,"Ivan","Korčok",21777,37.37,12604,42.11,9173,32.36
+3,"Trenčiansky kraj",303,"Považská Bystrica",2,"Peter","Pellegrini",36492,62.62,17327,57.88,19165,67.63
+3,"Trenčiansky kraj",304,"Prievidza",1,"Ivan","Korčok",36396,39.13,18369,42.08,18027,36.52
+3,"Trenčiansky kraj",304,"Prievidza",2,"Peter","Pellegrini",56607,60.86,25278,57.91,31329,63.47
+3,"Trenčiansky kraj",305,"Trenčín",1,"Ivan","Korčok",44463,45.96,28863,49.73,15600,40.29
+3,"Trenčiansky kraj",305,"Trenčín",2,"Peter","Pellegrini",52279,54.03,29166,50.26,23113,59.70
+4,"Nitriansky kraj",401,"Komárno",1,"Ivan","Korčok",11765,36.61,7901,42.37,3864,28.64
+4,"Nitriansky kraj",401,"Komárno",2,"Peter","Pellegrini",20371,63.38,10746,57.62,9625,71.35
+4,"Nitriansky kraj",402,"Levice",1,"Ivan","Korčok",20790,42.23,10980,48.94,9810,36.62
+4,"Nitriansky kraj",402,"Levice",2,"Peter","Pellegrini",28431,57.76,11454,51.05,16977,63.37
+4,"Nitriansky kraj",403,"Nitra",1,"Ivan","Korčok",49173,44.20,26100,49.43,23073,39.47
+4,"Nitriansky kraj",403,"Nitra",2,"Peter","Pellegrini",62074,55.79,26695,50.56,35379,60.52
+4,"Nitriansky kraj",404,"Nové Zámky",1,"Ivan","Korčok",24532,40.26,12551,47.77,11981,34.57
+4,"Nitriansky kraj",404,"Nové Zámky",2,"Peter","Pellegrini",36393,59.73,13719,52.22,22674,65.42
+4,"Nitriansky kraj",405,"Šaľa",1,"Ivan","Korčok",10393,47.40,5627,55.57,4766,40.38
+4,"Nitriansky kraj",405,"Šaľa",2,"Peter","Pellegrini",11533,52.59,4498,44.42,7035,59.61
+4,"Nitriansky kraj",406,"Topoľčany",1,"Ivan","Korčok",12854,33.44,4940,38.12,7914,31.06
+4,"Nitriansky kraj",406,"Topoľčany",2,"Peter","Pellegrini",25576,66.55,8017,61.87,17559,68.93
+5,"Žilinský kraj",501,"Čadca",1,"Ivan","Korčok",13596,29.78,5826,31.71,7770,28.48
+5,"Žilinský kraj",501,"Čadca",2,"Peter","Pellegrini",32046,70.21,12542,68.28,19504,71.51
+5,"Žilinský kraj",502,"Dolný Kubín",1,"Ivan","Korčok",11021,54.25,5075,55.57,5946,53.17
+5,"Žilinský kraj",502,"Dolný Kubín",2,"Peter","Pellegrini",9292,45.74,4057,44.42,5235,46.82
+5,"Žilinský kraj",503,"Liptovský Mikuláš",1,"Ivan","Korčok",17975,45.75,9541,48.28,8434,43.19
+5,"Žilinský kraj",503,"Liptovský Mikuláš",2,"Peter","Pellegrini",21310,54.24,10220,51.71,11090,56.80
+5,"Žilinský kraj",504,"Martin",1,"Ivan","Korčok",26984,44.58,17708,47.47,9276,39.94
+5,"Žilinský kraj",504,"Martin",2,"Peter","Pellegrini",33534,55.41,19588,52.52,13946,60.05
+5,"Žilinský kraj",505,"Námestovo",1,"Ivan","Korčok",22164,46.92,5377,46.42,16787,47.08
+5,"Žilinský kraj",505,"Námestovo",2,"Peter","Pellegrini",25069,53.07,6205,53.57,18864,52.91
+5,"Žilinský kraj",506,"Ružomberok",1,"Ivan","Korčok",14816,49.31,7106,51.76,7710,47.25
+5,"Žilinský kraj",506,"Ružomberok",2,"Peter","Pellegrini",15227,50.68,6622,48.23,8605,52.74
+5,"Žilinský kraj",507,"Žilina",1,"Ivan","Korčok",55311,44.09,32136,49.93,23175,37.93
+5,"Žilinský kraj",507,"Žilina",2,"Peter","Pellegrini",70133,55.90,32223,50.06,37910,62.06
+6,"Banskobystrický kraj",601,"Banská Bystrica",1,"Ivan","Korčok",29578,49.41,21496,52.94,8082,41.96
+6,"Banskobystrický kraj",601,"Banská Bystrica",2,"Peter","Pellegrini",30280,50.58,19103,47.05,11177,58.03
+6,"Banskobystrický kraj",602,"Brezno",1,"Ivan","Korčok",9680,34.16,3781,40.58,5899,31.01
+6,"Banskobystrický kraj",602,"Brezno",2,"Peter","Pellegrini",18654,65.83,5535,59.41,13119,68.98
+6,"Banskobystrický kraj",603,"Lučenec",1,"Ivan","Korčok",12571,34.49,6587,41.39,5984,29.14
+6,"Banskobystrický kraj",603,"Lučenec",2,"Peter","Pellegrini",23874,65.50,9326,58.60,14548,70.85
+6,"Banskobystrický kraj",604,"Rimavská Sobota",1,"Ivan","Korčok",11596,29.40,7083,36.30,4513,22.65
+6,"Banskobystrický kraj",604,"Rimavská Sobota",2,"Peter","Pellegrini",27834,70.59,12425,63.69,15409,77.34
+6,"Banskobystrický kraj",605,"Veľký Krtíš",1,"Ivan","Korčok",5302,31.28,1833,36.88,3469,28.96
+6,"Banskobystrický kraj",605,"Veľký Krtíš",2,"Peter","Pellegrini",11646,68.71,3137,63.11,8509,71.03
+6,"Banskobystrický kraj",606,"Zvolen",1,"Ivan","Korčok",25431,40.89,16569,42.97,8862,37.48
+6,"Banskobystrický kraj",606,"Zvolen",2,"Peter","Pellegrini",36762,59.10,21985,57.02,14777,62.51
+6,"Banskobystrický kraj",607,"Žiar nad Hronom",1,"Ivan","Korčok",18047,40.46,9762,44.23,8285,36.77
+6,"Banskobystrický kraj",607,"Žiar nad Hronom",2,"Peter","Pellegrini",26548,59.53,12307,55.76,14241,63.22
+7,"Prešovský kraj",701,"Bardejov",1,"Ivan","Korčok",14766,42.22,7003,48.29,7763,37.92
+7,"Prešovský kraj",701,"Bardejov",2,"Peter","Pellegrini",20203,57.77,7498,51.70,12705,62.07
+7,"Prešovský kraj",702,"Humenné",1,"Ivan","Korčok",14360,30.14,7937,33.97,6423,26.46
+7,"Prešovský kraj",702,"Humenné",2,"Peter","Pellegrini",33272,69.85,15421,66.02,17851,73.53
+7,"Prešovský kraj",703,"Kežmarok",1,"Ivan","Korčok",12507,47.80,5666,51.54,6841,45.10
+7,"Prešovský kraj",703,"Kežmarok",2,"Peter","Pellegrini",13653,52.19,5326,48.45,8327,54.89
+7,"Prešovský kraj",704,"Poprad",1,"Ivan","Korčok",31207,50.10,19702,52.31,11505,46.73
+7,"Prešovský kraj",704,"Poprad",2,"Peter","Pellegrini",31072,49.89,17959,47.68,13113,53.26
+7,"Prešovský kraj",705,"Prešov",1,"Ivan","Korčok",53574,50.72,28809,55.09,24765,46.44
+7,"Prešovský kraj",705,"Prešov",2,"Peter","Pellegrini",52034,49.27,23482,44.90,28552,53.55
+7,"Prešovský kraj",706,"Stará Ľubovňa",1,"Ivan","Korčok",8489,38.60,3438,44.76,5051,35.30
+7,"Prešovský kraj",706,"Stará Ľubovňa",2,"Peter","Pellegrini",13499,61.39,4242,55.23,9257,64.69
+7,"Prešovský kraj",707,"Stropkov",1,"Ivan","Korčok",2871,31.67,1587,38.10,1284,26.21
+7,"Prešovský kraj",707,"Stropkov",2,"Peter","Pellegrini",6192,68.32,2578,61.89,3614,73.78
+7,"Prešovský kraj",708,"Svidník",1,"Ivan","Korčok",3911,27.23,1851,30.03,2060,25.12
+7,"Prešovský kraj",708,"Svidník",2,"Peter","Pellegrini",10450,72.76,4311,69.96,6139,74.87
+7,"Prešovský kraj",709,"Vranov nad Topľou",1,"Ivan","Korčok",9129,28.56,3405,32.59,5724,26.60
+7,"Prešovský kraj",709,"Vranov nad Topľou",2,"Peter","Pellegrini",22828,71.43,7041,67.40,15787,73.39
+8,"Košický kraj",801,"Košice",1,"Ivan","Korčok",64582,59.80,64582,59.80,0,0.00
+8,"Košický kraj",801,"Košice",2,"Peter","Pellegrini",43408,40.19,43408,40.19,0,0.00
+8,"Košický kraj",802,"Košice - okolie",1,"Ivan","Korčok",24843,47.40,1414,44.87,23429,47.56
+8,"Košický kraj",802,"Košice - okolie",2,"Peter","Pellegrini",27567,52.59,1737,55.12,25830,52.43
+8,"Košický kraj",803,"Michalovce",1,"Ivan","Korčok",14902,29.14,7966,35.29,6936,24.27
+8,"Košický kraj",803,"Michalovce",2,"Peter","Pellegrini",36237,70.85,14605,64.70,21632,75.72
+8,"Košický kraj",804,"Rožňava",1,"Ivan","Korčok",8138,38.70,3796,47.16,4342,33.45
+8,"Košický kraj",804,"Rožňava",2,"Peter","Pellegrini",12888,61.29,4253,52.83,8635,66.54
+8,"Košický kraj",805,"Spišská Nová Ves",1,"Ivan","Korčok",20885,42.41,10754,45.84,10131,39.29
+8,"Košický kraj",805,"Spišská Nová Ves",2,"Peter","Pellegrini",28355,57.58,12702,54.15,15653,60.70
+8,"Košický kraj",806,"Trebišov",1,"Ivan","Korčok",11038,31.52,4854,35.19,6184,29.14
+8,"Košický kraj",806,"Trebišov",2,"Peter","Pellegrini",23970,68.47,8937,64.80,15033,70.85
