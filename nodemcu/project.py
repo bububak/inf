@@ -51,7 +51,7 @@ def try_tile_generation():
     if len(tiles) < (LIGHTS + TILES_BUFFER_AMOUNT):
         random_nums = urandom(2)
         if random_nums[0] > 192: # hold
-            tiles += [2] * (1+int(random_nums[1]//50)) + [0]
+            tiles += [2] * (3+int(random_nums[1]//75)) + [0]
         elif random_nums[0] > 128: # press
             tiles += [1,0]
         else:                       # gap
@@ -61,7 +61,7 @@ def try_tile_generation():
 def check_input_correctness():
     global tiles
     lights[0] = colors[5]
-    if tiles[0] == 0 and not blue_button.is_pressed:
+    if tiles[0] == 0 and not blue_button.state:
         lights[0] = colors[0]
     elif tiles[0] == 1 and blue_button.is_pressed:
         lights[0] = colors[4]
@@ -109,9 +109,7 @@ lights.write()
 
 
 
-frame_counter = 0
 while True:
-    frame_counter += 1
     blue_button.tick()
 
 
