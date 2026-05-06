@@ -1,6 +1,7 @@
 from machine import Pin
 from neopixel import NeoPixel
 import time
+from os import urandom
 
 
 
@@ -20,8 +21,6 @@ class Custom_Button():
 
     def button_down(self, e):
         self.sub_tick_press = True
-
-
 
 
     def button_up(self, e):
@@ -44,32 +43,68 @@ class Custom_Button():
 
 def clear_lights():
     for light in range(LIGHTS):
-        lights[light] = colors["black"]
+        lights[light] = colors[0]
 
+
+def try_tile_generation():
+    global tiles
+    if len(tiles) < (LIGHTS + TILES_BUFFER_AMOUNT):
+        random_nums = urandom(2)
+        if random_nums[0] > 192: # hold
+            tiles += [2] * (1+int(random_nums[1]//50)) + [0]
+        elif random_nums[0] > 128: # press
+            tiles += [1,0]
+        else:                       # gap
+            tiles += [0] * int(random_nums[1]//100)
+
+
+def check_input_correctness():
+    global tiles
+    lights[0] = colors[5]
+    if tiles[0] == 0 and not blue_button.is_pressed:
+        lights[0] = colors[0]
+    elif tiles[0] == 1 and blue_button.is_pressed:
+        lights[0] = colors[4]
+    elif tiles[0] == 2 and blue_button.is_held:
+        lights[0] = colors[4]
+
+
+
+
+def draw_new_tick():
+    clear_lights()
+
+    for light in range(LIGHTS):
+        lights[light] = colors[tiles[light]]
 
 
 
 LIGHTS = 8
 BRIGHTNESS = 50
-FRAME_TIME = 0.2
-DEBUG_LIGHT_TIME = 0.05
+FRAME_TIME = 0.5
+DEBUG_LIGHT_TIME = 0
+TILES_BUFFER_AMOUNT = 3
+
+tiles = [0] * (LIGHTS + TILES_BUFFER_AMOUNT)
 
 colors = {
-    "black":(0,0,0),
-    "blue":(0,0,BRIGHTNESS),
-    "red":(BRIGHTNESS,0,0),
-    "white":(BRIGHTNESS,BRIGHTNESS,BRIGHTNESS),
+    0:(0,0,0),
+    2:(0,0,BRIGHTNESS),
+    1:(BRIGHTNESS,0,BRIGHTNESS),
+    3:(BRIGHTNESS,BRIGHTNESS,BRIGHTNESS),
+    4:(0,BRIGHTNESS,0),
+    5:(BRIGHTNESS,0,0)
 }
 
 # button and light assignments
 lights = NeoPixel(Pin(14), LIGHTS)
 blue_button = Custom_Button(5, 4)
 
-# boot confirmation flash
-lights[0] = colors["white"]
+# boot confirmation 1flash
+lights[0] = colors[3]
 lights.write()
 time.sleep(1)
-lights[0] = (0,0,0)
+lights[0] = colors[0]
 lights.write()
 
 
@@ -77,25 +112,17 @@ lights.write()
 frame_counter = 0
 while True:
     frame_counter += 1
-
     blue_button.tick()
 
-    clear_lights()
 
-    # actual things you need to run
+    tiles.pop(0)
+    try_tile_generation() # podla random gen si vyber 1-3 (tap, hold, gap) a pri dvoch aj nahodny duration 
 
-    lights[0] = colors["white"]
+    draw_new_tick()
 
-    if blue_button.is_pressed:
-        lights[1] = colors["red"]
+    check_input_correctness()
 
-    if blue_button.is_held:
-        lights[2] = colors["blue"]
 
-    lights.write()
-
-    time.sleep(DEBUG_LIGHT_TIME)
-    lights[0] = colors["black"]
     lights.write()
 
     time.sleep(FRAME_TIME - DEBUG_LIGHT_TIME)
