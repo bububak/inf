@@ -25,7 +25,6 @@ class Custom_Button():
 
     def button_up(self, e):
         self.was_interrupted = True
-        print("debug interrupt")
 
 
     def tick(self):
@@ -35,7 +34,6 @@ class Custom_Button():
         self.is_held = self.state and (self.was_pressed_last_tick or self.sub_tick_press) and (not self.was_interrupted)
         self.current_hold_tick_duration = int(self.is_held)*(self.current_hold_tick_duration+1)
 
-        # saving for next tick
         self.was_pressed_last_tick = self.is_pressed
         self.sub_tick_press = False
         self.was_interrupted = False
