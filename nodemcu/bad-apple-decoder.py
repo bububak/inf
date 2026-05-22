@@ -29,3 +29,5 @@ while chunk:
     time.sleep(0.016)
 
     chunk = f.read(bytes_per_frame)
+
+f.close()
