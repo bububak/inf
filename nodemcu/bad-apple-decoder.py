@@ -1,9 +1,9 @@
-import time, os
+import time
 
 
 W = 8
 H = 8
-FRAMERATE = 30
+FRAMERATE = 10
 ms_per_frame = 1/FRAMERATE
 
 
@@ -23,10 +23,9 @@ while chunk:
     for c in b:
         frame += translate[c]
 
-    os.system("clear")
     for i in range(H):
         print(frame[i*W:(i+1)*W])
-    time.sleep(0.016)
+    time.sleep(ms_per_frame)
 
     chunk = f.read(bytes_per_frame)
 
