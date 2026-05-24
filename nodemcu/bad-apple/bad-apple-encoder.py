@@ -24,20 +24,17 @@ x0 = (W - size) // 2
 y0 = (H - size) // 2
 bytes_per_frame = (TARGET_W*TARGET_H)//8 + (0 if (TARGET_W*TARGET_H)%8 == 0 else 1)
 print(f"Encoding {INPUT_VIDEO} as {OUTPUT_FILE} with {bytes_per_frame} bytes ber frame at {TARGET_FRAMERATE}fps")
-print(frame_skip_amount)
 
 framei = 0
 
 while ret:
 
-    # only process every x frames
     if framei % frame_skip_amount == 0:
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         square = gray[y0:y0+size, x0:x0+size]
         small = cv2.resize(square, (TARGET_W, TARGET_H), interpolation=cv2.INTER_AREA)
         radical = (small > THRESHHOLD).astype(int)
-        # print(radical)
 
         value = 0
         bit_index = 0
