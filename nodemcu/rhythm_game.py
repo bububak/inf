@@ -4,9 +4,7 @@ import time
 from os import urandom
 
 
-
-class Custom_Button():
-
+class Custom_Button:
     def __init__(self, pin_id1, pin_id2) -> None:
         self.sub_tick_press = False
         self.was_pressed_last_tick = False
@@ -18,21 +16,24 @@ class Custom_Button():
         self.pin2 = Pin(pin_id2, Pin.IN, Pin.PULL_UP)
         self.pin2.irq(trigger=Pin.IRQ_RISING, handler=self.button_up)
 
-
     def button_down(self, e):
         self.sub_tick_press = True
 
-
     def button_up(self, e):
         self.was_interrupted = True
-
 
     def tick(self):
         self.state = not self.pin1.value()
 
         self.is_pressed = self.state or self.sub_tick_press
-        self.is_held = self.state and (self.was_pressed_last_tick or self.sub_tick_press) and (not self.was_interrupted)
-        self.current_hold_tick_duration = int(self.is_held)*(self.current_hold_tick_duration+1)
+        self.is_held = (
+            self.state
+            and (self.was_pressed_last_tick or self.sub_tick_press)
+            and (not self.was_interrupted)
+        )
+        self.current_hold_tick_duration = int(self.is_held) * (
+            self.current_hold_tick_duration + 1
+        )
 
         self.was_pressed_last_tick = self.is_pressed
         self.sub_tick_press = False
@@ -48,12 +49,12 @@ def try_tile_generation():
     global tiles
     if len(tiles) < (LIGHTS + TILES_BUFFER_AMOUNT):
         random_nums = urandom(2)
-        if random_nums[0] > 192: # hold
-            tiles += [2] * (3+int(random_nums[1]//75)) + [0]
-        elif random_nums[0] > 128: # press
-            tiles += [1,0]
-        else:                       # gap
-            tiles += [0] * int(random_nums[1]//100)
+        if random_nums[0] > 192:  # hold
+            tiles += [2] * (3 + int(random_nums[1] // 75)) + [0]
+        elif random_nums[0] > 128:  # press
+            tiles += [1, 0]
+        else:  # gap
+            tiles += [0] * int(random_nums[1] // 100)
 
 
 def check_input_correctness():
@@ -67,14 +68,11 @@ def check_input_correctness():
         lights[0] = colors[4]
 
 
-
-
 def draw_new_tick():
     clear_lights()
 
     for light in range(LIGHTS):
         lights[light] = colors[tiles[light]]
-
 
 
 LIGHTS = 8
@@ -86,12 +84,12 @@ TILES_BUFFER_AMOUNT = 3
 tiles = [0] * (LIGHTS + TILES_BUFFER_AMOUNT)
 
 colors = {
-    0:(0,0,0),
-    2:(0,0,BRIGHTNESS),
-    1:(BRIGHTNESS,0,BRIGHTNESS),
-    3:(BRIGHTNESS,BRIGHTNESS,BRIGHTNESS),
-    4:(0,BRIGHTNESS,0),
-    5:(BRIGHTNESS,0,0)
+    0: (0, 0, 0),
+    2: (0, 0, BRIGHTNESS),
+    1: (BRIGHTNESS, 0, BRIGHTNESS),
+    3: (BRIGHTNESS, BRIGHTNESS, BRIGHTNESS),
+    4: (0, BRIGHTNESS, 0),
+    5: (BRIGHTNESS, 0, 0),
 }
 
 # button and light assignments
@@ -106,22 +104,16 @@ lights[0] = colors[0]
 lights.write()
 
 
-
 while True:
     blue_button.tick()
 
-
     tiles.pop(0)
-    try_tile_generation() # podla random gen si vyber 1-3 (tap, hold, gap) a pri dvoch aj nahodny duration 
+    try_tile_generation()  # podla random gen si vyber 1-3 (tap, hold, gap) a pri dvoch aj nahodny duration
 
     draw_new_tick()
 
     check_input_correctness()
 
-
     lights.write()
 
     time.sleep(FRAME_TIME - DEBUG_LIGHT_TIME)
-
-
-
