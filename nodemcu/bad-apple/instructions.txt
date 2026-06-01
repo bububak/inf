@@ -1,0 +1,12 @@
+Defaultne vsetko funguje, pokial su vsetky kable zapojene podla vzoru (vid. kabliky.jpg).
+Rychlost prehravania je momentalne nemenitelna (default 10 fps pre moje video je +-10% od originalu)
+
+
+1. na esp8266 uploadnut nasledovne subory do rovnakeho folderu (najlepsie /), thonny => view => files:
+    max7219.py ("driver" na 8x8 light matrix)
+    badapple.bin (video encodovane podla nastaveni v bad-apple-encoder.py, default je 8x8 10fps)
+    play.py (samotny script ktory spusti prehravanie videa importovanim driverov a otvorenim .bin)
+2. uistit sa ze v play.py su spravne nastavene W, H, FRAMERATE, a Pin(n) pri vytvoreni premennej "display"
+    (musia byt zhodne s premennymi s ktorymi ste video encodovali v bad-apple-encoder.py)
+3. spustit play.py, pauzovat nejde, ukoncenie iba cez soft-reset (v thonny ctrl+f2)
+
