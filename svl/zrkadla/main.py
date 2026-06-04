@@ -26,10 +26,27 @@ class Ray:
 
         # direction change on special tiles
         space = field[self.y][self.x]
+
         if space in "|-":  # splitter
             pass
+            # self.dir = directions["/"][directions["/"].index(self.dir) - 2]
+            # rays.append(
+            #     Ray(
+            #         self.x,
+            #         self.y,
+            #         directions["\\"][directions["\\"].index(self.dir) - 2],
+            #     )
+            # )
+
         if space in "\\/":
             self.dir = directions[space][directions[space].index(self.dir) - 2]
+
+
+# mainloop
+def mainloop(stdscr):
+    while rays:
+        rays[-1].tick()
+        sleep(0.01)
 
 
 # directions as (x,y)
@@ -43,14 +60,8 @@ rays = [
 with open("zrkadla-nosplit.txt", "r") as f:
     field = f.read().split("\n")
 visited = [[[0, 0] for x in range(len(field[0]))] for y in range(len(field))]
-print(visited)
 
 
-# mainloop
-while rays:
-    rays[-1].tick()
-    sleep(0.01)
-
-
-# count visited
-print("finishd")
+# code to execute
+curses.wrapper(mainloop)
+print("finished")
