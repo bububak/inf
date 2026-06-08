@@ -41,7 +41,6 @@ class Ray:
         # direction change on special tiles
         # splitter:
         space = field[self.y][self.x]
-
         if (space == "|" and (self.dir == RIGHT or self.dir == LEFT)) or (
             space == "-" and (self.dir == UP or self.dir == DOWN)
         ):
