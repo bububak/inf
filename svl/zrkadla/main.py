@@ -9,7 +9,12 @@ class Ray:
         self.dir = dir
 
     def tick(self):
-        global field
+        global field, visited
+
+        # add coordinate to visited before moving - does not write outside play area
+        visited[self.y][self.x][0 if (self.dir == RIGHT or self.dir == LEFT) else 1] = (
+            True
+        )
 
         # move 1 space
         self.x, self.y = self.x + self.dir[0], self.y + self.dir[1]
@@ -29,14 +34,14 @@ class Ray:
 
         if space in "|-":  # splitter
             pass
-            # self.dir = directions["/"][directions["/"].index(self.dir) - 2]
-            # rays.append(
-            #     Ray(
-            #         self.x,
-            #         self.y,
-            #         directions["\\"][directions["\\"].index(self.dir) - 2],
-            #     )
-            # )
+            self.dir = directions["/"][directions["/"].index(self.dir) - 2]
+            rays.append(
+                Ray(
+                    self.x,
+                    self.y,
+                    directions["\\"][directions["\\"].index(self.dir) - 2],
+                )
+            )
 
         if space in "\\/":
             self.dir = directions[space][directions[space].index(self.dir) - 2]
@@ -59,9 +64,17 @@ rays = [
 # load file into field
 with open("zrkadla-nosplit.txt", "r") as f:
     field = f.read().split("\n")
-visited = [[[0, 0] for x in range(len(field[0]))] for y in range(len(field))]
+# visited: mapa s [T/F, T/F] na kazdom mieste v poradi "navstivene horizontalne", "navstivene vertikalne"
+visited = [[[False, False] for x in range(len(field[0]))] for y in range(len(field))]
 
 
 # code to execute
 curses.wrapper(mainloop)
 print("finished")
+
+n = 0
+for row in range(len(visited)):
+    for column in range(len(visited[0])):
+        if True in visited[row][column]:
+            n += 1
+print(f"visited {n} squares")
