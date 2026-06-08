@@ -4,7 +4,6 @@ from time import sleep
 
 class Ray:
     def __init__(self, x, y, dir) -> None:
-        # sets first ray to outside top left
         self.x = x
         self.y = y
         self.dir = dir
@@ -22,7 +21,7 @@ class Ray:
             or self.y == -1
             or self.y == len(field)
         ):
-            rays.pop()
+            rays.remove(self)
             return
 
         # delete self if space traversed
@@ -31,14 +30,13 @@ class Ray:
             ((self.dir == RIGHT or self.dir == LEFT) and visited[self.y][self.x][0])
             or ((self.dir == UP or self.dir == DOWN) and visited[self.y][self.x][1])
         ) and not (space == "\\" or space == "/"):
-            rays.pop()
+            rays.remove(self)
             return
 
         # add coordinate to visited after moving - does not write outside play area because self deleting is before
         visited[self.y][self.x][0 if (self.dir == RIGHT or self.dir == LEFT) else 1] = (
             True
         )
-        print(self.x, self.y, field[self.y][self.x], self.dir, self)
 
         # direction change on special tiles
         # splitter:
@@ -63,11 +61,11 @@ class Ray:
 def mainloop(stdscr):
     while len(rays) > 0:
         rays[-1].tick()
-        sleep(0.01)
+        # sleep(0.01)
 
 
 # load file into field
-with open("zrkadla-custom.txt", "r") as f:
+with open("zrkadla.txt", "r") as f:
     field = f.read().split("\n")
     field.pop()
 # visited: mapa with [T/F, T/F] in order of "visited horizontally", "visited vertically"
@@ -76,6 +74,8 @@ visited = [[[False, False] for x in range(len(field[0]))] for y in range(len(fie
 # directions as (x,y)
 UP, DOWN, RIGHT, LEFT = (0, -1), (0, 1), (1, 0), (-1, 0)
 directions = {"/": (UP, DOWN, RIGHT, LEFT), "\\": (UP, DOWN, LEFT, RIGHT)}
+
+# sets first ray to outside top left
 rays = [
     Ray(-1, 0, RIGHT),
 ]
