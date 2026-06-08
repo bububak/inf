@@ -14,7 +14,6 @@ class Ray:
 
         # move 1 space
         self.x, self.y = self.x + self.dir[0], self.y + self.dir[1]
-        space = field[self.y][self.x]
 
         # delete and return if out of bounds
         if (
@@ -27,6 +26,7 @@ class Ray:
             return
 
         # delete self if space traversed
+        space = field[self.y][self.x]
         if (
             ((self.dir == RIGHT or self.dir == LEFT) and visited[self.y][self.x][0])
             or ((self.dir == UP or self.dir == DOWN) and visited[self.y][self.x][1])
