@@ -8,7 +8,7 @@ class Ray:
         self.y = y
         self.dir = dir
 
-    def tick(self):
+    def tick(self, stdscr):
         global field, visited
 
         # move 1 space
@@ -56,18 +56,25 @@ class Ray:
         elif space in "\\/":
             self.dir = directions[space][directions[space].index(self.dir) - 2]
 
+        if SHOULD_ANIMATE:
+            stdscr.addch(self.y, self.x, "#")
+
 
 # mainloop
 def mainloop(stdscr):
+    if SHOULD_ANIMATE:
+        curses.use_default_colors()
     while len(rays) > 0:
-        rays[-1].tick()
-        # sleep(0.01)
+        rays[0].tick(stdscr)
+        if SHOULD_ANIMATE:
+            stdscr.refresh()
+            sleep(DELAY)
 
 
 # load file into field
-with open("zrkadla.txt", "r") as f:
-    field = f.read().split("\n")
-    field.pop()
+with open("zrkadlaXXL.txt", "r") as f:
+    field = f.read().splitlines()
+
 # visited: mapa with [T/F, T/F] in order of "visited horizontally", "visited vertically"
 visited = [[[False, False] for x in range(len(field[0]))] for y in range(len(field))]
 
@@ -82,11 +89,12 @@ rays = [
 
 
 # code to execute
-SHOULD_ANIMATE = False
+SHOULD_ANIMATE = True
+DELAY = 0.001
 if SHOULD_ANIMATE:
     curses.wrapper(mainloop)
 else:
-    mainloop("a")
+    mainloop("")
 print("finished")
 
 
