@@ -109,7 +109,7 @@ rays = [
 
 # code to execute
 SHOULD_ANIMATE = True
-SEARCH_TYPE = "last"
+SEARCH_TYPE = "bfs"
 
 DELAY = 0.01
 if SHOULD_ANIMATE:
