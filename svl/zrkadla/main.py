@@ -57,15 +57,34 @@ class Ray:
             self.dir = directions[space][directions[space].index(self.dir) - 2]
 
         if SHOULD_ANIMATE:
-            stdscr.addch(self.y, self.x, "#")
+            stdscr.addch(self.y, self.x, space)
+
+
+def draw_mirrors_before(stdscr):
+    for y in range(len(field)):
+        for x in range(len(field[0])):
+            print(field[y][x])
+            stdscr.addch(y, x, field[y][x] if field[y][x] in "\\/-|" else " ")
+    stdscr.refresh()
 
 
 # mainloop
 def mainloop(stdscr):
     if SHOULD_ANIMATE:
         curses.use_default_colors()
+
+        draw_mirrors_before(stdscr)
+
     while len(rays) > 0:
-        rays[0].tick(stdscr)
+        match SEARCH_TYPE:
+            case "bfs":
+                for ray in rays:
+                    ray.tick(stdscr)
+            case "first":
+                rays[0].tick(stdscr)
+            case "last":
+                rays[-1].tick(stdscr)
+
         if SHOULD_ANIMATE:
             stdscr.refresh()
             sleep(DELAY)
@@ -90,7 +109,9 @@ rays = [
 
 # code to execute
 SHOULD_ANIMATE = True
-DELAY = 0.001
+SEARCH_TYPE = "last"
+
+DELAY = 0.01
 if SHOULD_ANIMATE:
     curses.wrapper(mainloop)
 else:
