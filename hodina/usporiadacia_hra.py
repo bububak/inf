@@ -10,15 +10,13 @@ def vypis_poradie():
 
 def check_sorted():
     p = poradie.copy()
-    if not p[0] == "_" or p[-1] == "_":
+    if p[0] != "_" or p[-1] == "_":
         return False
     p.remove("_")
-    if not p == sorted(p):
-        return False
-    return True
+    return p == sorted(p)
 
 
-def is_valid_input(num):
+def is_valid_input(num: str):
     if not num.isnumeric():
         print("input musi byt cislo")
         return False
