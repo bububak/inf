@@ -33,7 +33,6 @@ def is_valid_input(num: str):
 def get_user_input(e) -> None:
     global turn_counter
     x = e.x // SQUARE_SIZE
-    n = poradie[x]
 
     if x < 0 or x > LIST_LENGTH:
         return
