@@ -5,7 +5,7 @@ import tkinter as tk
 def vypis_poradie():
     c.delete("all")
     for i, num in enumerate(poradie):
-        _ = c.create_text(SQUARE_SIZE * i + SQUARE_SIZE // 2, SQUARE_SIZE // 2, text=str(num))
+        _ = c.create_text(SQUARE_SIZE * i + SQUARE_SIZE // 2, SQUARE_SIZE // 2, text=str(num), font=("Arial", 16))
     c.update()
 
 
@@ -50,8 +50,8 @@ def get_user_input(e) -> None:
     turn_counter += 1
 
     if check_sorted():
-        print(f"Vyhral si na {turn_counter} tahov!")
-        root.quit()
+        _ = c.create_text(SQUARE_SIZE * (LIST_LENGTH + 1) // 2, SQUARE_SIZE // 2, text=f"Vyhral si na {turn_counter} tahov!", font=("Arial", 30, "bold"), fill="green")
+        c.unbind("<1>")
 
 
 LIST_LENGTH = 6
