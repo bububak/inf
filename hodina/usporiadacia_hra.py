@@ -40,7 +40,8 @@ LIST_LENGTH = 6
 EXCHANGE_RADIUS = 2
 turn_counter = 0
 poradie = [n + 1 for n in range(LIST_LENGTH)] + ["_"]
-random.shuffle(poradie)
+while check_sorted():
+    random.shuffle(poradie)
 
 
 while not check_sorted():
