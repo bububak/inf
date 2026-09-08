@@ -35,6 +35,10 @@ def get_user_input(e) -> None:
     x = e.x // SQUARE_SIZE
     n = poradie[x]
 
+    if x < 0 or x > LIST_LENGTH:
+        return
+
+    n = poradie[x]
     if not is_valid_input(str(n)):
         return
 
@@ -51,7 +55,7 @@ def get_user_input(e) -> None:
 
 
 LIST_LENGTH = 6
-EXCHANGE_RADIUS = 6
+EXCHANGE_RADIUS = 2
 turn_counter = 0
 poradie = [n + 1 for n in range(LIST_LENGTH)] + ["_"]
 while check_sorted():
