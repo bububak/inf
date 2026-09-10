@@ -5,7 +5,7 @@ import tkinter as tk
 def vypis_poradie():
     c.delete("all")
     for i, num in enumerate(poradie):
-        _ = c.create_text(SQUARE_SIZE * i + SQUARE_SIZE // 2, SQUARE_SIZE // 2, text=str(num), font=("Arial", 16))
+        _ = c.create_text(SQUARE_SIZE * i + SQUARE_SIZE // 2, SQUARE_SIZE // 2, text=str(num), font=("Arial", 16), fill=colors["text"])
     c.update()
 
 
@@ -51,17 +51,19 @@ def get_user_input(e) -> None:
     turn_counter += 1
 
     if check_sorted():
-        feedback_label.config(text=f"Vyhral si na {turn_counter} tahov!", font=("Arial", LABEL_FONT_SIZE, "bold"), fg="green")
+        feedback_label.config(text=f"Vyhral si na {turn_counter} tahov!", font=("Arial", LABEL_FONT_SIZE, "bold"), fg=colors["green"])
         c.unbind("<1>")
 
 
 def vypis_error(message: str):
-    feedback_label.config(text=message, fg="red")
+    feedback_label.config(text=message, fg=colors["red"])
 
 
 def clear_label():
     feedback_label.config(text="")
 
+
+colors = {"text":"#cdd6f4", "bg":"#1e1e2e","red":"#f38ba8", "green":"#a6e3a1", "blue":"#89b4fa"}
 
 LIST_LENGTH = 6
 EXCHANGE_RADIUS = 2
@@ -73,9 +75,10 @@ while check_sorted():
 SQUARE_SIZE = 100
 LABEL_FONT_SIZE = 20
 root = tk.Tk()
-feedback_label = tk.Label(root, text=f"Zorad cisla 1-{LIST_LENGTH} vymienanim s \"_\"", font=("Arial", LABEL_FONT_SIZE, "bold"))
+root.configure(bg=colors["bg"])
+feedback_label = tk.Label(root, text=f"Zorad cisla 1-{LIST_LENGTH} vymienanim s \"_\"", font=("Arial", LABEL_FONT_SIZE, "bold"),fg=colors["blue"], bg=colors["bg"])
 feedback_label.pack(padx=10, pady=10)
-c = tk.Canvas(root, width=SQUARE_SIZE * LIST_LENGTH + SQUARE_SIZE, height=SQUARE_SIZE)
+c = tk.Canvas(root, width=SQUARE_SIZE * LIST_LENGTH + SQUARE_SIZE, height=SQUARE_SIZE, bg=colors["bg"], highlightthickness=0)
 c.pack()
 
 
