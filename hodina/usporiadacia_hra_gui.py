@@ -3,9 +3,8 @@ import tkinter as tk
 
 
 def vypis_poradie():
-    c.delete("all")
     for i, num in enumerate(poradie):
-        _ = c.create_text(SQUARE_SIZE * i + SQUARE_SIZE // 2, SQUARE_SIZE // 2, text=str(num), font=("Arial", 16), fill=colors["text"])
+        canvas_items[num] = c.create_text(SQUARE_SIZE * i + SQUARE_SIZE // 2, SQUARE_SIZE // 2, text=str(num), font=("Arial", 16), fill=colors["text"])
     c.update()
 
 
@@ -19,8 +18,7 @@ def check_sorted():
 
 def is_valid_input(num: str):
     if not num.isnumeric():
-        # print("input musi byt cislo")
-        # vypis_error("input musi byt cislo")
+        vypis_error("input musi byt cislo")
         return False
     if int(num) > LIST_LENGTH or int(num) < 1:
         vypis_error(f"input musi byt v rozsahu 1 - {LIST_LENGTH}")
@@ -43,16 +41,22 @@ def get_user_input(e) -> None:
     if not is_valid_input(str(n)):
         return
 
-    pos1 = x
-    pos2 = poradie.index("_")
-    poradie[pos1], poradie[pos2] = poradie[pos2], poradie[pos1]
-
-    vypis_poradie()
+    swap_canvas_items(x, poradie.index("_"))
     turn_counter += 1
 
     if check_sorted():
         feedback_label.config(text=f"Vyhral si na {turn_counter} tahov!", font=("Arial", LABEL_FONT_SIZE, "bold"), fg=colors["green"])
         c.unbind("<1>")
+
+
+def swap_canvas_items(pos1, pos2):
+    a = poradie[pos1]
+    b = poradie[pos2]
+    poradie[pos1], poradie[pos2] = poradie[pos2], poradie[pos1]
+    c.itemconfig(canvas_items[a], text=str(b))
+    c.itemconfig(canvas_items[b], text=str(a))
+    canvas_items[a], canvas_items[b] = canvas_items[b], canvas_items[a]
+    c.update()
 
 
 def vypis_error(message: str):
@@ -67,6 +71,7 @@ colors = {"text":"#cdd6f4", "bg":"#1e1e2e","red":"#f38ba8", "green":"#a6e3a1", "
 
 LIST_LENGTH = 6
 EXCHANGE_RADIUS = 2
+canvas_items = {}
 turn_counter = 0
 poradie = [n + 1 for n in range(LIST_LENGTH)] + ["_"]
 while check_sorted():
