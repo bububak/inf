@@ -19,13 +19,14 @@ def check_sorted():
 
 def is_valid_input(num: str):
     if not num.isnumeric():
-        print("input musi byt cislo")
+        # print("input musi byt cislo")
+        # vypis_error("input musi byt cislo")
         return False
     if int(num) > LIST_LENGTH or int(num) < 1:
-        print(f"input musi byt v rozsahu 1 - {LIST_LENGTH}")
+        vypis_error(f"input musi byt v rozsahu 1 - {LIST_LENGTH}")
         return False
     if abs(poradie.index("_") - poradie.index(int(num))) > EXCHANGE_RADIUS:
-        print("zadane cislo je pridaleko od _")
+        vypis_error("zadane cislo je pridaleko od _")
         return False
     return True
 
@@ -37,6 +38,7 @@ def get_user_input(e) -> None:
     if x < 0 or x > LIST_LENGTH:
         return
 
+    clear_label()
     n = poradie[x]
     if not is_valid_input(str(n)):
         return
@@ -49,8 +51,16 @@ def get_user_input(e) -> None:
     turn_counter += 1
 
     if check_sorted():
-        _ = c.create_text(SQUARE_SIZE * (LIST_LENGTH + 1) // 2, SQUARE_SIZE // 2, text=f"Vyhral si na {turn_counter} tahov!", font=("Arial", 30, "bold"), fill="green")
+        feedback_label.config(text=f"Vyhral si na {turn_counter} tahov!", font=("Arial", LABEL_FONT_SIZE, "bold"), fg="green")
         c.unbind("<1>")
+
+
+def vypis_error(message: str):
+    feedback_label.config(text=message, fg="red")
+
+
+def clear_label():
+    feedback_label.config(text="")
 
 
 LIST_LENGTH = 6
@@ -61,7 +71,10 @@ while check_sorted():
     random.shuffle(poradie)
 
 SQUARE_SIZE = 100
+LABEL_FONT_SIZE = 20
 root = tk.Tk()
+feedback_label = tk.Label(root, text=f"Zorad cisla 1-{LIST_LENGTH} vymienanim s \"_\"", font=("Arial", LABEL_FONT_SIZE, "bold"))
+feedback_label.pack(padx=10, pady=10)
 c = tk.Canvas(root, width=SQUARE_SIZE * LIST_LENGTH + SQUARE_SIZE, height=SQUARE_SIZE)
 c.pack()
 
