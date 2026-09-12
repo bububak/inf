@@ -2,9 +2,9 @@ import random
 import tkinter as tk
 
 
-def vypis_poradie():
+def first_draw():
     pictures = {}
-    for i,n in enumerate(poradie):
+    for i,n in enumerate(frog_order):
         current_image = tk.PhotoImage(file=f"zabka{n}.png")
         pictures[n] = current_image
         canvas_items[n] = c.create_image(SQUARE_SIZE * i + SQUARE_SIZE // 2, SQUARE_SIZE // 2, image=current_image)
@@ -12,7 +12,7 @@ def vypis_poradie():
     return pictures
 
 def check_sorted():
-    p = poradie.copy()
+    p = frog_order.copy()
     if p[0] != "_" and p[-1] != "_":
         return False
     p.remove("_")
@@ -21,13 +21,13 @@ def check_sorted():
 
 def is_valid_input(num: str):
     if not num.isnumeric():
-        vypis_error("input musi byt cislo")
+        show_error("input musi byt cislo")
         return False
     if int(num) > LIST_LENGTH or int(num) < 1:
-        vypis_error(f"input musi byt v rozsahu 1 - {LIST_LENGTH}")
+        show_error(f"input musi byt v rozsahu 1 - {LIST_LENGTH}")
         return False
-    if abs(poradie.index("_") - poradie.index(int(num))) > EXCHANGE_RADIUS:
-        vypis_error("zadane cislo je pridaleko od _")
+    if abs(frog_order.index("_") - frog_order.index(int(num))) > EXCHANGE_RADIUS:
+        show_error("zadane cislo je pridaleko od _")
         return False
     return True
 
@@ -40,11 +40,11 @@ def get_user_input(e) -> None:
         return
 
     clear_label()
-    n = poradie[x]
+    n = frog_order[x]
     if not is_valid_input(str(n)):
         return
 
-    swap_canvas_items(x, poradie.index("_"))
+    swap_canvas_items(x, frog_order.index("_"))
     turn_counter += 1
 
     if check_sorted():
@@ -53,16 +53,16 @@ def get_user_input(e) -> None:
 
 
 def swap_canvas_items(pos1, pos2):
-    a = poradie[pos1]
-    b = poradie[pos2]
-    poradie[pos1], poradie[pos2] = b, a
+    a = frog_order[pos1]
+    b = frog_order[pos2]
+    frog_order[pos1], frog_order[pos2] = b, a
     c.itemconfig(canvas_items[a], image=pictures[b])
     c.itemconfig(canvas_items[b], image=pictures[a])
     canvas_items[a], canvas_items[b] = canvas_items[b], canvas_items[a]
     c.update()
 
 
-def vypis_error(message: str):
+def show_error(message: str):
     feedback_label.config(text=message, fg=colors["red"])
 
 
@@ -76,9 +76,9 @@ LIST_LENGTH = 6
 EXCHANGE_RADIUS = 2
 canvas_items = {}
 turn_counter = 0
-poradie = [n + 1 for n in range(LIST_LENGTH)] + ["_"]
+frog_order = [n + 1 for n in range(LIST_LENGTH)] + ["_"]
 while check_sorted():
-    random.shuffle(poradie)
+    random.shuffle(frog_order)
 
 SQUARE_SIZE = 230
 LABEL_FONT_SIZE = 20
@@ -91,6 +91,6 @@ c.pack()
 
 
 
-pictures = vypis_poradie()
+pictures = first_draw()
 _ = c.bind("<1>", get_user_input)
 c.mainloop()
