@@ -1,15 +1,15 @@
 import random
 
 
-def vypis_poradie():
+def print_frogs():
     print(f"T{turn_counter}    ", end="")
-    for num in poradie:
+    for num in frog_order:
         print(num, end=" ")
     print()
 
 
 def check_sorted():
-    p = poradie.copy()
+    p = frog_order.copy()
     if p[0] != "_" or p[-1] == "_":
         return False
     p.remove("_")
@@ -23,14 +23,14 @@ def is_valid_input(num: str):
     if int(num) > LIST_LENGTH or int(num) < 1:
         print(f"input musi byt v rozsahu 1 - {LIST_LENGTH}")
         return False
-    if abs(poradie.index("_") - poradie.index(int(num))) > EXCHANGE_RADIUS:
+    if abs(frog_order.index("_") - frog_order.index(int(num))) > EXCHANGE_RADIUS:
         print("zadane cislo je pridaleko od _")
         return False
     return True
 
 
 def get_user_input():
-    vypis_poradie()
+    print_frogs()
     user_input = input("ktore cislo vymenit s _?\n > ")
     print()
     return user_input
@@ -39,9 +39,9 @@ def get_user_input():
 LIST_LENGTH = 6
 EXCHANGE_RADIUS = 2
 turn_counter = 0
-poradie = [n + 1 for n in range(LIST_LENGTH)] + ["_"]
+frog_order = [n + 1 for n in range(LIST_LENGTH)] + ["_"]
 while check_sorted():
-    random.shuffle(poradie)
+    random.shuffle(frog_order)
 
 
 while not check_sorted():
@@ -51,8 +51,8 @@ while not check_sorted():
     while not is_valid_input(user_input):
         user_input = get_user_input()
 
-    pos1 = poradie.index(int(user_input))
-    pos2 = poradie.index("_")
-    poradie[pos1], poradie[pos2] = poradie[pos2], poradie[pos1]
+    pos1 = frog_order.index(int(user_input))
+    pos2 = frog_order.index("_")
+    frog_order[pos1], frog_order[pos2] = frog_order[pos2], frog_order[pos1]
 
 print(f"Vyhral si na {turn_counter} tahov!")
