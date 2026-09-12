@@ -52,7 +52,7 @@ def get_user_input(e) -> None:
 def swap_canvas_items(pos1, pos2):
     a = poradie[pos1]
     b = poradie[pos2]
-    poradie[pos1], poradie[pos2] = poradie[pos2], poradie[pos1]
+    poradie[pos1], poradie[pos2] = b, a
     c.itemconfig(canvas_items[a], text=str(b))
     c.itemconfig(canvas_items[b], text=str(a))
     canvas_items[a], canvas_items[b] = canvas_items[b], canvas_items[a]
