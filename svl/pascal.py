@@ -4,6 +4,7 @@ import tkinter as tk
 def main_generation():
     S = int(s_entry.get())
     D = int(d_entry.get())
+    SIZE = int(size_entry.get())
     WIDTH = (S - 1) * SIZE + 1
     HALF = WIDTH // 2
     HEIGHT = SIZE + 1
@@ -38,16 +39,20 @@ def main_generation():
         c.update()
 
 
-SIZE = 500
 root = tk.Tk()
 c = tk.Canvas(root, width=501, height=501, bg="black", highlightthickness=0)
 c.grid(row=0, column=0, columnspan=3)
+size_entry = tk.Entry(root, width=5, font="arial 20")
+size_entry.grid(row=1, column=0)
+size_entry.insert(0, "500")
 s_entry = tk.Entry(root, width=5, font="arial 20")
-s_entry.grid(row=1, column=0)
+s_entry.grid(row=2, column=0)
+s_entry.insert(0, "2")
 d_entry = tk.Entry(root, width=5, font="arial 20")
-d_entry.grid(row=1, column=2, pady=10)
+d_entry.grid(row=3, column=0)
+d_entry.insert(0, "2")
 main_button = tk.Button(text="Generate", command=main_generation, font="Arial 30 bold")
-main_button.grid(row=1, column=1, columnspan=1, pady=10)
+main_button.grid(row=1, column=1, rowspan=3, pady=10)
 
 
 
