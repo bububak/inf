@@ -3,16 +3,16 @@ import tkinter as tk
 # ((S+1)%2+1) returns 2 if even, 1 if odd
 # ((S+1)%2) returns 1 if even, 0 if odd
 
-S = 4
-SIZE = 500
-WIDTH = (S - 1) * SIZE + 1 + ((S - 1) * SIZE * ((S + 1) % 2))
+S = 3
+D = 6
+SIZE = 1000
+WIDTH = (S - 1) * SIZE + 1
 HALF = WIDTH // 2
 HEIGHT = SIZE + 1
 
 prev = (S - 1) * [0] + [1] + [0] * (S - 1)
 new = []
 turns = 0
-# if S % 2 == 0 -> double size (symmetry gaps between)
 c = tk.Canvas(width=WIDTH, height=HEIGHT, bg="black", highlightthickness=0)
 c.pack()
 
@@ -33,20 +33,15 @@ while turns < SIZE:
     prev = (S - 1) * [0] + new + [0] * (S - 1)
 
     # draw the new line
-    if S % 2:
-        spacing = 1
-        left = HALF - (len(new) - 1) // 2
-    else:
-        spacing = 2
-        left = HALF - (len(new) - 1)
+    left = HALF - (len(new) - 1) // 2
 
     for i, n in enumerate(new):
-        if n % S != 0:
+        if n % D != 0:
 
             c.create_rectangle(
-                left + spacing * i,
+                left + i,
                 turns,
-                left + spacing * i + 1,
+                left + i + 1,
                 turns + 1,
                 fill="white",
                 width=0,
