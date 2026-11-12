@@ -105,9 +105,16 @@ t.delay(0)
 t.width(5)
 t.seth(90)
 
+# origianl vlocka:
 # vlocka(2,500)
+#
+# ucebnicova vlocka:
 # ciara2(3, 500)
+#
+# trojuholnikova pyramida:
 # ciara3(5, 500)
-bin_strom(3, (2, 8), 120, (5, 8), 300)
+#
+# binarny strom:
+# bin_strom(3, (2, 8), 120, (5, 8), 300)
 
 t.done()
