@@ -103,6 +103,7 @@ def bin_strom(n, branch_count, angle_range, branch_length, d):
 t.speed(0)
 t.delay(0)
 t.width(5)
+t.seth(90)
 
 # vlocka(2,500)
 # ciara2(3, 500)
