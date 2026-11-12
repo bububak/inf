@@ -1,3 +1,4 @@
+# OI 42. bI1
 # with open("04.txt") as f:
 #     r = int(f.readline())
 #     hodnoty = list(map(int, f.readline().strip().split()))
